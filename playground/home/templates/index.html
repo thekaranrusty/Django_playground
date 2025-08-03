@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+    <div class="container mt-5">
+    <div class = "container mt-3">
+
+        <h2 class="mb-4 text-center">Send mail to client</h2>
+        <a href= "{% url 'send_email' %}" class = "btn btn-success">Send Email</a>
+
+    </div>
+
+    <div class="table-responsive mt-5">
+        <table class="table table-bordered table-striped table-hover shadow">
+        <thead class="table-dark">
+            <tr>
+            <th>Sr.</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Can Vote</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for people in peoples%}
+            <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td>
+                {% if people.age > 28 %}
+                Can Vote
+                {% else %}
+                Can Not Vote
+                {% endif %}
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+    
+{% endblock %}

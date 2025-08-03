@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block start %}
+
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Update Recipe</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+            <!-- CSRF token for Django (if you're using this with Django) -->
+            {% csrf_token %}
+
+            <!-- Recipe Name -->
+            <div class="mb-3">
+                <label for="recipeName" class="form-label">Recipe Name</label>
+                <input type="text" class="form-control" id="recipeName" name="receipe_name" value="{{receipe.receipe_name}}" required>
+            </div>
+
+            <!-- Recipe Description -->
+            <div class="mb-3">
+                <label for="recipeDescription" class="form-label">Recipe Description</label>
+                <textarea class="form-control" id="recipeDescription" name="recipe_discription" rows="4" required>{{receipe.receipe_discription}}</textarea>
+            </div>
+
+            <!-- Recipe Image -->
+            <div class="mb-3">
+                <label for="recipeImage" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="recipeImage" name="receipe_image" accept="image/*">
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                <button type="submit" class="btn btn-success">Submit Recipe</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

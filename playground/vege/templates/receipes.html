@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Submit Your Recipe</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+            <!-- CSRF token for Django (if you're using this with Django) -->
+            {% csrf_token %}
+
+            <!-- Recipe Name -->
+            <div class="mb-3">
+                <label for="recipeName" class="form-label">Recipe Name</label>
+                <input type="text" class="form-control" id="recipeName" name="receipe_name" placeholder="Enter recipe name" required>
+            </div>
+
+            <!-- Recipe Description -->
+            <div class="mb-3">
+                <label for="recipeDescription" class="form-label">Recipe Description</label>
+                <textarea class="form-control" id="recipeDescription" name="recipe_discription" rows="4" placeholder="Describe your recipe..." required></textarea>
+            </div>
+
+            <!-- Recipe Image -->
+            <div class="mb-3">
+                <label for="recipeImage" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="recipeImage" name="receipe_image" accept="image/*">
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                <button type="submit" class="btn btn-success">Submit Recipe</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+        <h4 class="mb-3">Search Recipes</h4>
+        <form method="GET">
+            <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for a recipe..." name="search">
+            <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+
+
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center text-primary">All Submitted Recipes</h2>
+
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered shadow-sm">
+            <thead class="table-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Recipe Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for recipe in receipes %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ recipe.receipe_name }}</td>
+                <td>{{ recipe.receipe_discription }}</td>
+                <td>
+                {% if recipe.receipe_image %}
+                    <img src="/media/{{ recipe.receipe_image }}" alt="Image" class="img-thumbnail" style="max-width: 100px;">
+                {% else %}
+                    <span class="text-muted">No image</span>
+                {% endif %}
+                </td>
+                <td>
+                    <p></p>
+                    <a href="/delete_receipe/{{recipe.id}}" class="btn btn-danger">Delete</a>
+                    <p></p>
+                    <a href="/update_receipe/{{recipe.id}}" class="btn btn-success">Update</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center text-danger">No recipes found.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}

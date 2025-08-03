@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div >
+          <h3 class="text-center mb-4">Create an Account</h3>
+
+          <form method="POST">
+
+          {% csrf_token %}
+
+          {% if messages %}
+            <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+            </div>
+          {% endif %}
+
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your first name" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your last name" required>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
+            </div>
+
+            <!-- Confirm Password -->
+            {% comment %} <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+            </div> {% endcomment %}
+
+            <!-- Register Button -->
+            <div class="d-grid mb-3">
+              <button type="submit" class="btn btn-success">Register</button>
+            </div>
+
+            <!-- Login Link -->
+            <p class="text-center small">Already have an account? <a href="/login/" class="text-decoration-none">Login here</a></p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

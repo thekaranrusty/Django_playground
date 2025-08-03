@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block start %}
+    
+
+  <!-- Marks Table -->
+  <div class="table-responsive mt-5 mx-5">
+
+    <h4>Name : {{queryset.first.student.student_name}}</h4>
+    <h4>Student Id : <b> {{queryset.first.student.student_id}} </b></h4>
+    
+    <h4>Total Marks : {{ total_marks.total_marks }}/600</h4>
+    <h4>Rank : {{queryset.first.student.studentreportcard.first.student_rank}} </h4>
+    <h4>Date of Result : {{queryset.first.student.studentreportcard.first.date_of_rank_generation}} </h4>
+
+
+    <table class="table table-bordered table-striped table-hover text-center">
+      <tbody>
+        {% for marks in queryset %}
+        <tr>
+          <th>{{forloop.counter}}</th>
+          <td>{{marks.subject.subject_name}}</td>
+          <td>{{ marks.marks }}</td>
+          </tr>
+          
+        {% empty %}
+        <tr>
+          <td colspan="7">No student marks available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <!-- Back Button -->
+  <div class="mb-3 mt-3 mx-5">
+    <a href="{% url 'get_students' %}" class="btn btn-secondary">&larr; Back to Students</a>
+  </div>
+
+
+
+{% endblock %}
